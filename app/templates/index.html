@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>BSL Fingerspelling Recognition</title>
+</head>
+
+<body>
+
+    <h1>British Sign Language Fingerspelling Recognition</h1>
+
+    <p>
+        Upload a short video containing a BSL alphabet gesture.
+    </p>
+
+    <form
+        method="POST"
+        action="/predict"
+        enctype="multipart/form-data"
+    >
+
+        <input
+            type="file"
+            name="video"
+            accept="video/*"
+            required
+        >
+
+        <button type="submit">
+            Predict
+        </button>
+
+    </form>
+
+
+    {% if prediction %}
+
+        <h2>
+            Predicted Letter: {{ prediction }}
+        </h2>
+
+        <p>
+            Confidence:
+            {{ "%.2f"|format(confidence * 100) }}%
+        </p>
+
+    {% endif %}
+
+
+    {% if error %}
+
+        <p>
+            {{ error }}
+        </p>
+
+    {% endif %}
+
+</body>
+
+</html>
